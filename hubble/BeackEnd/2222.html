@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Chatbot solo con input testo</title>
+  <style>
+    body { font-family: Arial; }
+    .chat { max-width: 400px; margin: auto; padding: 20px; }
+    .bubble { margin-bottom: 10px; }
+    input[type="text"] { width: 100%; padding: 10px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <div class="chat" id="chat">
+    <div class="bubble">
+      <input type="text" value="Ciao! Fammi una domanda." disabled>
+    </div>
+  </div>
+
+  <form onsubmit="return handleUserInput()">
+    <input type="text" id="campoDomanda" placeholder="Scrivi la tua domanda qui..." autofocus>
+  </form>
+
+  <script src="chatbot.js"></script>
+</body>
+</html>

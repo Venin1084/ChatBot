@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Slider di Bottoni</title>
+  <style>
+    .slider-container {
+      display: flex;
+      align-items: center;
+      max-width: 600px;
+      margin: 50px auto;
+    }
+
+    .nav {
+      background-color: #444;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .slider {
+      overflow-x: auto;
+      flex: 1;
+      scroll-behavior: smooth;
+      white-space: nowrap;
+    }
+
+    .slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .slider button {
+      display: inline-block;
+      min-width: 100px;
+      margin: 5px;
+      padding: 10px;
+      font-size: 16px;
+      white-space: normal;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slider-container">
+    <button class="nav" id="prev">&lt;</button>
+
+    <div class="slider" id="slider">
+      <!-- Bottoni da far scorrere -->
+      <button>Uno</button>
+      <button>Due</button>
+      <button>Tre</button>
+      <button>Quattro</button>
+      <button>Cinque</button>
+      <button>Sei</button>
+      <button>Sette</button>
+      <button>Otto</button>
+      <button>Nove</button>
+      <button>Dieci</button>
+    </div>
+
+    <button class="nav" id="next">&gt;</button>
+  </div>
+
+  <script>
+    const slider = document.getElementById('slider');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+
+    const scrollAmount = 150;
+
+    prev.addEventListener('click', () => {
+      slider.scrollLeft -= scrollAmount;
+    });
+
+    next.addEventListener('click', () => {
+      slider.scrollLeft += scrollAmount;
+    });
+  </script>
+
+</body>
+</html>

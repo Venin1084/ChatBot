@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="ref/icons8-telescope-100.png" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Hubble</title>
+</head>
+<body>
+  <main>
+    <section class="cronologia">
+      <div class="logo">
+        <img src="ref/icons8-telescope-100.png" alt="logo" />
+      </div>
+      <div class="pastTitile">Oggi</div>
+      <div class="nomechat">domanda 1</div>
+    </section>
+
+    <section class="chatSection">
+      <h1 class="botName">Hubble</h1>
+      <div class="subtitle"><h3>"Guardiamo insieme oltre le stelle, fai domande, esplora l'infinito!"</h3></div>
+      <p >suggerimeti sulle possibili domande</p>
+      <div class="slider-container">
+        
+        <button class="nav" id="prev">&lt;</button>
+        <div class="slider" id="slider">
+          <button onclick="inserisciTesto(`Cos’è un buco nero nello spazio profondo?`)">Cos’è un buco nero nello spazio profondo?</button>
+          <button onclick="inserisciTesto(`Come nasce una stella nell’universo?`)">Come nasce una stella nell’universo?</button>
+          <button onclick="inserisciTesto(`Cosa sono le galassie esattamente?`)">Cosa sono le galassie esattamente?</button>
+          <button onclick="inserisciTesto(`Perché la Luna cambia forma visibile?`)">Perché la Luna cambia forma visibile?</button>
+          <button onclick="inserisciTesto(`Che cos’è un’eclissi solare totale?`)">Che cos’è un’eclissi solare totale?</button>
+          <button onclick="inserisciTesto(`Come si misura la distanza spaziale?`)">Come si misura la distanza spaziale?</button>
+          <button onclick="inserisciTesto(`Che differenza c’è tra meteora e cometa?`)">Che differenza c’è tra meteora e cometa?</button>
+          <button onclick="inserisciTesto(`Come si formano i pianeti giganti?`)">Come si formano i pianeti giganti?</button>
+          <button onclick="inserisciTesto(`Che cos’è la Via Lattea galattica?`)">Che cos’è la Via Lattea galattica?</button>
+          <button onclick="inserisciTesto(`Perché lo spazio è completamente muto?`)">Perché lo spazio è completamente muto?</button>
+        </div>
+        <button class="nav" id="next">&gt;</button>
+      </div>
+
+      <!-- Chat display -->
+      <div class="chat-messages" id="chatMessages"></div>
+
+      <!-- Barra input -->
+      <div class="search-wrapper">
+        <input type="text" id="campoDomanda" placeholder="inserisci la tua domanda e premi invio" autocomplete="off" />
+        <img src="ref/icons8-sent-100.png" class="search-icon" alt="invio" onclick="handleUserInput()" />
+      </div>
+    </section>
+  </main>
+
+    <script src="javascript.js"></script>
+</body>
+</html>
