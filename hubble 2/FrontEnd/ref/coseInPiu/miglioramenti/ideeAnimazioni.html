@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="ref/icons8-telescope-100.png" type="image/x-icon" />
+  <title>Hubble</title>
+  <style>
+    :root {
+      --deep-lavender: #7761A9;
+      --lapis-blue: #25336E;
+      --midnight: #130F3A;
+      --dark-slate-blue: #403D91;
+      --pearl-bush: #DEDEDD;
+      --lavender-purple: #8474B7;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--midnight);
+      color: var(--pearl-bush);
+      font-family: Arial, sans-serif;
+    }
+
+    main {
+      display: flex;
+      min-height: 100vh;
+      gap: 10%;
+    }
+
+    .cronologia {
+      position: relative;
+      left: 0;
+      top: 0;
+      width: 260px;
+      background: linear-gradient(190deg,
+        #403D91 0%,
+        #7761A9 35%,
+        #8474B7 70%,
+        #B9A4E5 100%);
+      height: 100vh;
+      text-align: center;
+      padding-top: 40px;
+      animation: gradientShift 15s ease infinite alternate;
+      background-size: 200% 200%;
+    }
+
+    .chatSection {
+      position: relative;
+      width: calc(100% - 260px);
+      padding-bottom: 100px;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .botName {
+      font-size: 42px;
+      margin-top: 90px;
+      margin-bottom: 0px;
+      font-weight: bold;
+      background-image: linear-gradient(45deg,
+        #403D91 0%,
+        #7761A9 35%,
+        #8474B7 70%,
+        #B9A4E5 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .subtitle {
+      font-style: italic;
+      margin: 10px 0px 10px 0px;
+    }
+
+    .slider-container {
+      display: flex;
+      align-items: center;
+      max-width: 600px;
+    }
+
+    .nav {
+      background-color: transparent;
+      color: var(--lavender-purple);
+      border: none;
+      padding: 10px;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .slider {
+      overflow-x: auto;
+      flex: 1;
+      scroll-behavior: smooth;
+      white-space: nowrap;
+    }
+
+    .slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .slider button {
+      display: inline-block;
+      min-width: 100px;
+      margin: 5px;
+      padding: 10px;
+      font-size: 16px;
+      background-color: var(--lavender-purple);
+      color: var(--pearl-bush);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .slider button:hover {
+      background-color: var(--dark-slate-blue);
+      transform: scale(1.03);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .chat-messages {
+      height: calc(100vh - 380px);
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .user-message,
+    .bot-message {
+      max-width: 70%;
+      padding: 12px 16px;
+      border-radius: 16px;
+      margin-bottom: 10px;
+      word-break: break-word;
+      opacity: 0;
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    .user-message {
+      background-color: var(--dark-slate-blue);
+      align-self: flex-end;
+      margin-left: auto;
+    }
+
+    .bot-message {
+      background-color: var(--lavender-purple);
+      align-self: flex-start;
+      margin-right: auto;
+    }
+
+    .search-wrapper {
+      position: fixed;
+      bottom: 20px;
+      left: 280px;
+      right: 40px;
+      max-width: unset;
+      width: auto;
+    }
+
+    .search-wrapper input[type="text"] {
+      width: 100%;
+      background-color: var(--lavender-purple);
+      border-radius: 20px;
+      border: none;
+      padding: 16px 50px 16px 20px;
+      color: var(--pearl-bush);
+      font-size: 16px;
+    }
+
+    .search-wrapper ::placeholder {
+      color: var(--pearl-bush);
+      opacity: 0.7;
+    }
+
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      right: 25px;
+      transform: translateY(-50%);
+      height: 24px;
+      width: 24px;
+      pointer-events: auto;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .search-icon:active {
+      transform: translateY(-50%) scale(0.92);
+    }
+
+    .chatSection p {
+      margin-top: 20px;
+      margin-bottom: 0px;
+    }
+
+    .search-wrapper input[type="text"]:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--lavender-purple);
+      transition: box-shadow 0.3s ease;
+    }
+
+    /* Animazioni */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 1; filter: drop-shadow(0 0 8px rgba(185, 164, 229, 0.6)); }
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    /* Loader iniziale */
+    .star-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--midnight);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .telescope-loader img {
+      width: 80px;
+      animation: float 2s ease-in-out infinite, twinkle 3s ease-in-out infinite;
+    }
+
+    .logo img {
+      animation: twinkle 4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader iniziale -->
+  <div class="star-loader" id="loader">
+    <div class="telescope-loader">
+      <img src="ref/icons8-telescope-100.png" alt="Loading...">
+    </div>
+  </div>
+
+  <main>
+    <section class="cronologia">
+      <div class="logo">
+        <img src="ref/icons8-telescope-100.png" alt="logo" />
+      </div>
+      <div class="pastTitile">Oggi</div>
+      <div class="nomechat">domanda 1</div>
+    </section>
+
+    <section class="chatSection">
+      <h1 class="botName">Hubble</h1>
+      <div class="subtitle"><h3>"Guardiamo insieme oltre le stelle, fai domande, esplora l'infinito!"</h3></div>
+      <p>suggerimeti sulle possibili domande</p>
+      <div class="slider-container">
+        <button class="nav" id="prev">&lt;</button>
+        <div class="slider" id="slider">
+          <button onclick="inserisciTesto(`Cos'è un buco nero nello spazio profondo?`)">Cos'è un buco nero nello spazio profondo?</button>
+          <button onclick="inserisciTesto(`Come nasce una stella nell'universo?`)">Come nasce una stella nell'universo?</button>
+          <button onclick="inserisciTesto(`Cosa sono le galassie esattamente?`)">Cosa sono le galassie esattamente?</button>
+          <button onclick="inserisciTesto(`Perché la Luna cambia forma visibile?`)">Perché la Luna cambia forma visibile?</button>
+          <button onclick="inserisciTesto(`Che cos'è un'eclissi solare totale?`)">Che cos'è un'eclissi solare totale?</button>
+          <button onclick="inserisciTesto(`Come si misura la distanza spaziale?`)">Come si misura la distanza spaziale?</button>
+          <button onclick="inserisciTesto(`Che differenza c'è tra meteora e cometa?`)">Che differenza c'è tra meteora e cometa?</button>
+          <button onclick="inserisciTesto(`Come si formano i pianeti giganti?`)">Come si formano i pianeti giganti?</button>
+          <button onclick="inserisciTesto(`Che cos'è la Via Lattea galattica?`)">Che cos'è la Via Lattea galattica?</button>
+          <button onclick="inserisciTesto(`Perché lo spazio è completamente muto?`)">Perché lo spazio è completamente muto?</button>
+        </div>
+        <button class="nav" id="next">&gt;</button>
+      </div>
+
+      <div class="chat-messages" id="chatMessages"></div>
+
+      <div class="search-wrapper">
+        <input type="text" id="campoDomanda" placeholder="inserisci la tua domanda e premi invio" autocomplete="off" />
+        <img src="ref/icons8-sent-100.png" class="search-icon" alt="invio" onclick="handleUserInput()" />
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Loader
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.getElementById('loader').style.opacity = '0';
+        setTimeout(() => {
+          document.getElementById('loader').style.display = 'none';
+        }, 500);
+      }, 1500);
+    });
+
+    // Funzioni esistenti
+    function inserisciTesto(testo) {
+      document.getElementById("campoDomanda").value = testo;
+    }
+
+    const slider = document.getElementById('slider');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const scrollAmount = 150;
+
+    prev.addEventListener('click', () => {
+      slider.scrollLeft -= scrollAmount;
+    });
+    next.addEventListener('click', () => {
+      slider.scrollLeft += scrollAmount;
+    });
+
+    document.getElementById("campoDomanda").addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        handleUserInput();
+      }
+    });
+
+    function handleUserInput() {
+      const input = document.getElementById('campoDomanda');
+      const message = input.value.trim();
+      if (!message) return;
+
+      addMessage(message, false);
+      const risposta = getBotResponse(message);
+      setTimeout(() => {
+        addMessage(risposta, true);
+      }, 500);
+
+      input.value = '';
+    }
+
+    function addMessage(text, isBot) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = isBot ? 'bot-message' : 'user-message';
+      msgDiv.innerText = text;
+      document.getElementById('chatMessages').appendChild(msgDiv);
+      document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+    }
+
+    function getBotResponse(msg) {
+      msg = msg.toLowerCase();
+
+      if (msg.includes('ciao')) return 'Ciao! Come posso aiutarti?';
+      if (msg.includes('come stai')) return 'Sto bene, grazie!';
+      if (msg.includes('buco nero')) return 'È una regione dello spazio dove la gravità è così forte che nulla può sfuggire, nemmeno la luce. Si forma dopo il collasso di una stella molto massiccia.';
+      if (msg.includes('stella')) return 'Una stella nasce da una nube di gas e polveri chiamata nebulosa, che collassa su sé stessa a causa della gravità fino ad accendersi per fusione nucleare.';
+      if (msg.includes('galassie')) return 'Le galassie sono enormi gruppi di stelle, gas, polveri e materia oscura. La nostra, la Via Lattea, ne contiene più di 100 miliardi.';
+      if (msg.includes('luna') && msg.includes('forma')) return 'La Luna cambia forma apparente perché vediamo porzioni diverse della sua superficie illuminate dal Sole durante il suo movimento attorno alla Terra.';
+      if (msg.includes('eclissi')) return 'Succede quando la Luna si posiziona esattamente tra la Terra e il Sole, oscurandolo completamente per alcuni minuti.';
+      if (msg.includes('distanza')) return "'Si usano unità come l'anno luce o i parsec per misurare distanze nello spazio.'";
+      if (msg.includes('meteora') || msg.includes('cometa')) return "'Una meteora è un piccolo frammento che brucia entrando nell'atmosfera. Una cometa è un corpo ghiacciato che orbita e forma una coda visibile.'";
+      if (msg.includes('pianeti giganti')) return 'Si formano lontano dalla stella madre, dove è possibile accumulare gas e materiali.';
+      if (msg.includes('via lattea')) return 'È la galassia a spirale in cui si trova il nostro sistema solare.';
+      if (msg.includes('muto') || msg.includes('silenzioso')) return 'Perché nello spazio non c è aria o materia sufficiente a trasmettere onde sonore.';
+      if (msg.includes('che ore sono')) return new Date().toLocaleTimeString('it-IT');
+
+      return "Mi dispiace, non ho capito.";
+    }
+  </script>
+</body>
+</html>

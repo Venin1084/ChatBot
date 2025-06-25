@@ -1,0 +1,98 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="ref/icons8-telescope-100.png" type="image/x-icon" />
+  <!-- CSS FILE -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- FONT IMPORT FILE -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+</style>
+  <title>Hubble</title>
+</head>
+<body>
+ <!-- Loader iniziale -->
+  <div class="star-loader" id="loader">
+    <div class="telescope-loader">
+      <img src="ref/icons8-telescope-100.png" alt="Loading..."> 
+      <div class="subtitle"><h3>"Guardiamo insieme oltre le stelle, fai domande, esplora l'infinito!"</h3></div>
+    </div>
+  </div> 
+<!-- VERO CONTNET -->
+  <main>
+    <section class="cronologia">
+      <div class="logo">
+        <img src="ref/icons8-telescope-100.png" alt="logo" />
+        
+      </div>
+      <div class="pastTitile">Oggi</div>
+      <div class="nomechat">domanda 1</div>
+    </section>
+
+    <section class="chatSection">
+    <div class="containerProva">
+       <h1 class="botName">Hubble</h1>
+     
+    <!-- Discovery Cards Section - Modificata per mostrare sempre le 4 carte -->
+      <div class="discovery-cards">
+        <div class="discovery-card">
+          <div class="card-icon">🕳️</div>
+          <div class="card-title">Fenomeni Estremi</div>
+          <div class="card-description">Buchi neri, supernovae e i misteri più incredibili del cosmo</div>
+          
+          <div class="card-questions">
+            <div class="question-item" onclick="inserisciTesto('Cos\'è un buco nero nello spazio profondo?')">Cos'è un buco nero?</div>
+            <div class="question-item" onclick="inserisciTesto('Che cos\'è un\'eclissi solare totale?')">Cos'è un'eclissi solare?</div>
+            <div class="question-item" onclick="inserisciTesto('Perché lo spazio è completamente muto?')">Perché lo spazio è muto?</div>
+          </div>
+        </div>
+        
+        <div class="discovery-card">
+          <div class="card-icon">⭐</div>
+          <div class="card-title">Nascita Stellare</div>
+          <div class="card-description">La formazione delle stelle e l'evoluzione degli astri</div>
+          
+          <div class="card-questions">
+            <div class="question-item" onclick="inserisciTesto('Come nasce una stella nell\'universo?')">Come nasce una stella?</div>
+            <div class="question-item" onclick="inserisciTesto('Come si formano i pianeti giganti?')">Formazione pianeti giganti</div>
+          </div>
+        </div>
+        
+        <div class="discovery-card">
+          <div class="card-icon">🪐</div>
+          <div class="card-title">Sistema Solare</div>
+          <div class="card-description">Pianeti, lune e corpi celesti della nostra casa cosmica</div>
+          
+          <div class="card-questions">
+            <div class="question-item" onclick="inserisciTesto('Perché la Luna cambia forma visibile?')">Fasi lunari</div>
+            <div class="question-item" onclick="inserisciTesto('Che differenza c\'è tra meteora e cometa?')">Meteora vs Cometa</div>
+          </div>
+        </div>
+        
+        <div class="discovery-card">
+          <div class="card-icon">🌌</div>
+          <div class="card-title">Galassie</div>
+          <div class="card-description">Città stellari e strutture su larga scala dell'universo</div>
+          
+          <div class="card-questions">
+            <div class="question-item" onclick="inserisciTesto('Cosa sono le galassie esattamente?')">Cosa sono le galassie?</div>
+            <div class="question-item" onclick="inserisciTesto('Che cos\'è la Via Lattea galattica?')">Cos'è la Via Lattea?</div>
+            <div class="question-item" onclick="inserisciTesto('Come si misura la distanza spaziale?')">Misura distanze spaziali</div>
+          </div>
+        </div>
+      </div>
+</div>
+      <div class="chat-messages" id="chatMessages"></div>
+
+      <div class="search-wrapper">
+        <input type="text" id="campoDomanda" placeholder="inserisci la tua domanda e premi invio" autocomplete="off" />
+        <img src="ref/icons8-sent-100.png" class="search-icon" alt="invio" onclick="handleUserInput()" />
+      </div>
+    </section>
+  </main>
+
+
+    <script src="javascript.js"></script>
+</body>
+</html>

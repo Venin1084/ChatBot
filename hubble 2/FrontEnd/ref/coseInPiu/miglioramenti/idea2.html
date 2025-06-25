@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hubble - Esplora l'Universo</title>
+<link rel="stylesheet" href="../miglioramenti/style.css">
+<style>
+    /* Stile Discovery Cards */
+    .discovery-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .discovery-card {
+      background: linear-gradient(135deg, var(--lavender-purple), var(--deep-lavender));
+      border-radius: 15px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      min-height: 150px;
+    }
+
+    .discovery-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: rotate(45deg);
+      transition: all 0.6s;
+      opacity: 0;
+    }
+
+    .discovery-card:hover::before {
+      animation: shine 0.6s ease-in-out;
+    }
+
+    .discovery-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(119, 97, 169, 0.4);
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+    }
+
+    .card-icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .card-description {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 10px;
+    }
+
+    .card-questions {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(37, 51, 110, 0.9);
+      border-radius: 15px;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .discovery-card:hover .card-questions {
+      opacity: 1;
+    }
+
+    .question-item {
+      font-size: 13px;
+      margin-bottom: 8px;
+      padding: 5px;
+      border-radius: 5px;
+      transition: background 0.2s;
+    }
+
+    .question-item:hover {
+      background: rgba(119, 97, 169, 0.3);
+    }
+</style>
+</head>
+<body>
+  <main>
+    <section class="cronologia">
+      <div class="logo">
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQ1IiBzdHJva2U9IiNEMUMzRkYiIHN0cm9rZS13aWR0aD0iMyIgZmlsbD0ibm9uZSIvPgo8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIzNSIgZmlsbD0iIzc3NjFBOSIvPgo8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIyNSIgZmlsbD0iIzI1MzM2RSIvPgo8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxNSIgZmlsbD0iI0RFREVERCIvPgo8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1IiBmaWxsPSIjMTMwRjNBIi8+CjxyZWN0IHg9IjQ3IiB5PSIxMCIgd2lkdGg9IjYiIGhlaWdodD0iMjAiIGZpbGw9IiNEMUMzRkYiLz4KPHJlY3QgeD0iNDciIHk9IjcwIiB3aWR0aD0iNiIgaGVpZ2h0PSIyMCIgZmlsbD0iI0QxQzNGRiIvPgo8L3N2Zz4K" alt="Hubble Telescope" />
+      </div>
+      <div class="pastTitile">Oggi</div>
+      <div class="nomechat">Esplorazione Spaziale</div>
+      <div class="nomechat">Buchi Neri e Stelle</div>
+      <div class="nomechat">Sistema Solare</div>
+    </section>
+
+    <section class="chatSection">
+      <div class="status-indicator">
+        <div class="status-dot"></div>
+        <span>Online</span>
+      </div>
+      
+      <h1 class="botName">Hubble</h1>
+      <div class="subtitle">
+        <h3>"Guardiamo insieme oltre le stelle, fai domande, esplora l'infinito!"</h3>
+      </div>
+      
+   
+      
+      <!-- Discovery Cards Section - Modificata per mostrare sempre le 4 carte -->
+      <div class="discovery-cards">
+        <div class="discovery-card">
+          <div class="card-icon">🕳️</div>
+          <div class="card-title">Fenomeni Estremi</div>
+          <div class="card-description">Buchi neri, supernovae e i misteri più incredibili del cosmo</div>
+          
+          <div class="card-questions">
+            <div class="question-item" onclick="inserisciTesto('Cos\'è un buco nero nello spazio profondo?')">Cos'è un buco nero?</div>
+            <div class="question-item" onclick="inserisciTesto('Che cos\'è un\'eclissi solare totale?')">Cos'è un'eclissi solare?</div>
+            <div class="question-item" onclick="inserisciTesto('Perché lo spazio è completamente muto?')">Perché lo spazio è muto?</div>
+          </div>
+        </div>
+        
+        <div class="discovery-card">
+          <div class="card-icon">⭐</div>
+          <div class="card-title">Nascita Stellare</div>
+          <div class="card-description">La formazione delle stelle e l'evoluzione degli astri</div>
+          
+          <div class="card-questions">
+            <div class="question-item" onclick="inserisciTesto('Come nasce una stella nell\'universo?')">Come nasce una stella?</div>
+            <div class="question-item" onclick="inserisciTesto('Come si formano i pianeti giganti?')">Formazione pianeti giganti</div>
+          </div>
+        </div>
+        
+        <div class="discovery-card">
+          <div class="card-icon">🪐</div>
+          <div class="card-title">Sistema Solare</div>
+          <div class="card-description">Pianeti, lune e corpi celesti della nostra casa cosmica</div>
+          
+          <div class="card-questions">
+            <div class="question-item" onclick="inserisciTesto('Perché la Luna cambia forma visibile?')">Fasi lunari</div>
+            <div class="question-item" onclick="inserisciTesto('Che differenza c\'è tra meteora e cometa?')">Meteora vs Cometa</div>
+          </div>
+        </div>
+        
+        <div class="discovery-card">
+          <div class="card-icon">🌌</div>
+          <div class="card-title">Galassie</div>
+          <div class="card-description">Città stellari e strutture su larga scala dell'universo</div>
+          
+          <div class="card-questions">
+            <div class="question-item" onclick="inserisciTesto('Cosa sono le galassie esattamente?')">Cosa sono le galassie?</div>
+            <div class="question-item" onclick="inserisciTesto('Che cos\'è la Via Lattea galattica?')">Cos'è la Via Lattea?</div>
+            <div class="question-item" onclick="inserisciTesto('Come si misura la distanza spaziale?')">Misura distanze spaziali</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rimossa la sezione dello slider originale -->
+      
+      
+
+      <div class="typing-indicator" id="typingIndicator">
+        <div class="typing-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="search-wrapper">
+        <div class="search-container">
+          <input type="text" id="campoDomanda" placeholder="Esplora l'universo con le tue domande..." autocomplete="off" />
+          <button class="search-icon" onclick="handleUserInput()">
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIyIDJMMTEgMTNMMTUgMTdMMjIgMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xMSAxM0w5IDE1TDIgMjJMMiAyMkwxMSAxM1oiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==" alt="Invia" />
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <script>
+    function inserisciTesto(testo) {
+      document.getElementById("campoDomanda").value = testo;
+      // Opzionale: focus sul campo input dopo l'inserimento
+      document.getElementById("campoDomanda").focus();
+    }
+
+    // Invio con Enter
+    document.getElementById("campoDomanda").addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        handleUserInput();
+      }
+    });
+
+    function handleUserInput() {
+      const input = document.getElementById('campoDomanda');
+      const message = input.value.trim();
+      if (!message) return;
+
+      addMessage(message, false);
+      const risposta = getBotResponse(message);
+      addMessage(risposta, true);
+
+      input.value = '';
+    }
+
+    function addMessage(text, isBot) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = isBot ? 'bot-message' : 'user-message';
+      msgDiv.innerText = text;
+      document.getElementById('chatMessages').appendChild(msgDiv);
+      document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+    }
+
+    function getBotResponse(msg) {
+      msg = msg.toLowerCase();
+
+      if (msg.includes('ciao')) return 'Ciao! Come posso aiutarti?';
+      if (msg.includes('come stai')) return 'Sto bene, grazie!';
+      if (msg.includes('buco nero')) return 'È una regione dello spazio dove la gravità è così forte che nulla può sfuggire, nemmeno la luce. Si forma dopo il collasso di una stella molto massiccia.';
+      if (msg.includes('stella')) return 'Una stella nasce da una nube di gas e polveri chiamata nebulosa, che collassa su sé stessa a causa della gravità fino ad accendersi per fusione nucleare.';
+      if (msg.includes('galassie')) return 'Le galassie sono enormi gruppi di stelle, gas, polveri e materia oscura. La nostra, la Via Lattea, ne contiene più di 100 miliardi.';
+      if (msg.includes('luna') && msg.includes('forma')) return 'La Luna cambia forma apparente perché vediamo porzioni diverse della sua superficie illuminate dal Sole durante il suo movimento attorno alla Terra.';
+      if (msg.includes('eclissi')) return 'Succede quando la Luna si posiziona esattamente tra la Terra e il Sole, oscurandolo completamente per alcuni minuti in alcune zone del pianeta.';
+      if (msg.includes('distanza')) return 'Si usano unità come l\'anno luce (distanza che la luce percorre in un anno: circa 9.460 miliardi di km) o i parsec.';
+      if (msg.includes('meteora') || msg.includes('cometa')) return 'Una meteora è un piccolo frammento che brucia entrando nell\'atmosfera. Una cometa è un corpo ghiacciato che orbita e forma una coda visibile.';
+      if (msg.includes('pianeti giganti')) return 'Si formano lontano dalla stella madre, dove è possibile accumulare gas e materiali. Sono composti principalmente da idrogeno ed elio.';
+      if (msg.includes('via lattea')) return 'È la galassia a spirale in cui si trova il nostro sistema solare. Ha un diametro di circa 100.000 anni luce e miliardi di stelle.';
+      if (msg.includes('muto') || msg.includes('silenzioso')) return 'Perché nello spazio non c\'è aria o materia sufficiente a trasmettere onde sonore. È letteralmente un vuoto silenzioso.';
+      if (msg.includes('che ore sono')) return new Date().toLocaleTimeString('it-IT');
+
+      return "Mi dispiace, non ho capito.";
+    }
+    </script>
+  </main>
+</body>
+</html>

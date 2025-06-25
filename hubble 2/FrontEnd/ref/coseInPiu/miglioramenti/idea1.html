@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hubble - Esplora l'Universo</title>
+  <style>
+    /* Mantieni tutti gli stili esistenti... */
+
+    /* Stile Discovery Cards */
+    .discovery-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .discovery-card {
+      background: linear-gradient(135deg, var(--lavender-purple), var(--deep-lavender));
+      border-radius: 15px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+    }
+
+    .discovery-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: rotate(45deg);
+      transition: all 0.6s;
+      opacity: 0;
+    }
+
+    .discovery-card:hover::before {
+      animation: shine 0.6s ease-in-out;
+    }
+
+    .discovery-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(119, 97, 169, 0.4);
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+    }
+
+    .card-icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .card-description {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    /* Stile Search Suggestions */
+    .search-suggestions {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .search-suggestion {
+      padding: 10px 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .search-suggestion:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(5px);
+    }
+
+    /* Modifiche per il layout */
+    .suggestions-toggle {
+      display: flex;
+      justify-content: center;
+      margin: 15px 0;
+    }
+
+    .toggle-btn {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--pearl-bush);
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 768px) {
+      .discovery-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="cronologia">
+      <!-- Mantieni la cronologia esistente... -->
+    </section>
+
+    <section class="chatSection">
+      <!-- Mantieni l'header esistente... -->
+      
+      <div class="suggestions-toggle">
+        <button class="toggle-btn" onclick="toggleSuggestions('cards')">Discovery Cards</button>
+        <button class="toggle-btn" onclick="toggleSuggestions('search')">Search Suggestions</button>
+      </div>
+
+      <!-- Discovery Cards (Alternative 1) -->
+      <div id="discovery-cards-container">
+        <p>Scegli un argomento da esplorare:</p>
+        <div class="discovery-cards">
+          <div class="discovery-card" onclick="inserisciTesto('Cos\'è un buco nero nello spazio profondo?')">
+            <div class="card-icon">🕳️</div>
+            <div class="card-title">Fenomeni Estremi</div>
+            <div class="card-description">Buchi neri, supernovae e i misteri più incredibili del cosmo</div>
+          </div>
+          
+          <div class="discovery-card" onclick="inserisciTesto('Come nasce una stella nell\'universo?')">
+            <div class="card-icon">⭐</div>
+            <div class="card-title">Nascita Stellare</div>
+            <div class="card-description">La formazione delle stelle e l'evoluzione degli astri</div>
+          </div>
+          
+          <div class="discovery-card" onclick="inserisciTesto('Pianeti del sistema solare')">
+            <div class="card-icon">🪐</div>
+            <div class="card-title">Sistema Solare</div>
+            <div class="card-description">Pianeti, lune e corpi celesti della nostra casa cosmica</div>
+          </div>
+          
+          <div class="discovery-card" onclick="inserisciTesto('Cosa sono le galassie esattamente?')">
+            <div class="card-icon">🌌</div>
+            <div class="card-title">Galassie</div>
+            <div class="card-description">Città stellari e strutture su larga scala dell'universo</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Suggestions (Alternative 5) -->
+      <div id="search-suggestions-container" class="hidden">
+        <div class="search-preview">
+          <input type="text" id="search-input-demo" class="search-input-demo" placeholder="Inizia a digitare..." 
+                 oninput="showSearchSuggestions(this.value)" 
+                 onfocus="showSearchSuggestions(this.value)">
+          
+          <div class="search-suggestions" id="search-suggestions-list">
+            <div class="search-suggestion" onclick="inserisciTesto('Cos\'è un buco nero nello spazio profondo?')">
+              <span>🔍</span> Cos'è un buco nero nello spazio profondo?
+            </div>
+            <div class="search-suggestion" onclick="inserisciTesto('Come nasce una stella nell\'universo?')">
+              <span>🔍</span> Come nasce una stella nell'universo?
+            </div>
+            <div class="search-suggestion" onclick="inserisciTesto('Cosa sono le galassie esattamente?')">
+              <span>🔍</span> Cosa sono le galassie esattamente?
+            </div>
+            <div class="search-suggestion" onclick="inserisciTesto('Perché la Luna cambia forma visibile?')">
+              <span>🔍</span> Perché la Luna cambia forma visibile?
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mantieni il resto dell'interfaccia... -->
+    </section>
+  </main>
+
+  <script>
+    // Mantieni tutte le funzioni esistenti...
+
+    // Funzioni per le nuove features
+    function toggleSuggestions(type) {
+      if (type === 'cards') {
+        document.getElementById('discovery-cards-container').classList.remove('hidden');
+        document.getElementById('search-suggestions-container').classList.add('hidden');
+      } else {
+        document.getElementById('discovery-cards-container').classList.add('hidden');
+        document.getElementById('search-suggestions-container').classList.remove('hidden');
+      }
+    }
+
+    function showSearchSuggestions(value) {
+      const suggestions = document.getElementById('search-suggestions-list');
+      if (value && value.length > 0) {
+        suggestions.style.display = 'flex';
+        
+        // Simula suggerimenti dinamici (nella realtà dovresti filtrare una lista)
+        const suggestionsList = [
+          "Cos'è un buco nero nello spazio profondo?",
+          "Come nasce una stella nell'universo?",
+          "Cosa sono le galassie esattamente?",
+          "Perché la Luna cambia forma visibile?",
+          "Che cos'è un'eclissi solare totale?",
+          "Come si misura la distanza spaziale?"
+        ];
+        
+        const filtered = suggestionsList.filter(item => 
+          item.toLowerCase().includes(value.toLowerCase())
+        );
+        
+        // Aggiorna la lista dei suggerimenti
+        const suggestionsHTML = filtered.map(item => `
+          <div class="search-suggestion" onclick="inserisciTesto('${item}')">
+            <span>🔍</span> ${item}
+          </div>
+        `).join('');
+        
+        suggestions.innerHTML = filtered.length > 0 ? 
+          suggestionsHTML : 
+          '<div class="search-suggestion">Nessun risultato trovato</div>';
+      } else {
+        suggestions.style.display = 'none';
+      }
+    }
+
+    // Inizializza con le cards visibili
+    document.addEventListener('DOMContentLoaded', () => {
+      toggleSuggestions('cards');
+    });
+  </script>
+</body>
+</html>
