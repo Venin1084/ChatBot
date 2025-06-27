@@ -10,34 +10,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 </style>
   <title>Hubble</title>
-</head>
-<body>
+</head><body>
  <!-- Loader iniziale -->
-  <div class="star-loader" id="loader">
+ <div class="star-loader" id="loader">
     <div class="telescope-loader">
       <img src="ref/icons8-telescope-100.png" alt="Loading..."> 
       <div class="subtitle"><h3>"Guardiamo insieme oltre le stelle, fai domande, esplora l'infinito!"</h3></div>
     </div>
-  </div> 
-<!-- VERO CONTNET -->
-  <main>
-    <section class="cronologia">
-      <div class="logo">
-        <img src="ref/icons8-telescope-100.png" alt="logo" />
-        
-      </div>
-      <div class="pastTitile">Oggi</div>
-      <div class="nomechat">domanda 1</div>
-    </section>
+  </div>  
+  <!-- A SIDE -->
+   <!-- OPEN  -->
+<button id="toggleOpenSidebar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gallery-horizontal-end-icon lucide-gallery-horizontal-end"><path d="M2 7v10"/><path d="M6 5v14"/><rect width="12" height="18" x="10" y="3" rx="2"/></svg></button>
+<!-- CLOSE -->
+<button id="toggleCloseSidebar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+<!-- RESET -->
+<button id="resetChat"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg></button>
 
-    <section class="chatSection">
-    <div class="containerProva">
-       <h1 class="botName">Hubble</h1>
-     
-    <!-- Discovery Cards Section - Modificata per mostrare sempre le 4 carte -->
+<aside class="off-screen-menu" id="sidebarMenu">
+  <div class="logo">
+    <img src="ref/icons8-telescope-100.png" alt="Logo Hubble" />
+  </div>
+  <p class="pastTitile">CHAT RECENTI</p>
+  <div class="nomechat">Chat Finta 1</div>
+ 
+</aside>
+
+<main id="mainContent">
+  <section class="chatSection">
+      <h1 class="botName">Hubble</h1>
+      <div class="welcome-message">"Guardiamo insieme oltre le stelle, fai domande, esplora l'infinito!"</h3></div>
+    </div>
+      
       <div class="discovery-cards">
         <div class="discovery-card">
-          <div class="card-icon">🕳️</div>
+          <div class="card-icon">🌔</div>
           <div class="card-title">Fenomeni Estremi</div>
           <div class="card-description">Buchi neri, supernovae e i misteri più incredibili del cosmo</div>
           
@@ -49,7 +55,7 @@
         </div>
         
         <div class="discovery-card">
-          <div class="card-icon">⭐</div>
+          <div class="card-icon">🌟</div>
           <div class="card-title">Nascita Stellare</div>
           <div class="card-description">La formazione delle stelle e l'evoluzione degli astri</div>
           
@@ -60,7 +66,7 @@
         </div>
         
         <div class="discovery-card">
-          <div class="card-icon">🪐</div>
+          <div class="card-icon">☀️</div>
           <div class="card-title">Sistema Solare</div>
           <div class="card-description">Pianeti, lune e corpi celesti della nostra casa cosmica</div>
           
@@ -82,16 +88,15 @@
           </div>
         </div>
       </div>
-</div>
-      <div class="chat-messages" id="chatMessages"></div>
+    
+    <div class="chat-messages" id="chatMessages"></div>
 
-      <div class="search-wrapper">
-        <input type="text" id="campoDomanda" placeholder="inserisci la tua domanda e premi invio" autocomplete="off" />
-        <img src="ref/icons8-sent-100.png" class="search-icon" alt="invio" onclick="handleUserInput()" />
-      </div>
-    </section>
-  </main>
-
+    <div class="search-wrapper" id="searchWrapper">
+      <input type="text" id="campoDomanda" placeholder="Inserisci la tua domanda e premi invio" autocomplete="off" />
+      <img src="ref/icons8-sent-100.png" class="search-icon" alt="invio" onclick="handleUserInput()" />
+    </div>
+  </section>
+</main>
 
     <script src="javascript.js"></script>
 </body>
